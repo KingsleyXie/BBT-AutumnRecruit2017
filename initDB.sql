@@ -13,5 +13,17 @@ CREATE TABLE `register`(
   `department2` VARCHAR(30),
   `intro` VARCHAR(200),
   `register_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY(`ID`),
+  PRIMARY KEY(`ID`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `departments`(
+  `ID` INTEGER NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `img` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  PRIMARY KEY(`ID`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `game`(
+	`passed_number` INTEGER NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
