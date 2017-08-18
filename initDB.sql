@@ -27,3 +27,14 @@ CREATE TABLE `departments`(
 CREATE TABLE `game`(
 	`passed_number` INTEGER NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+INSERT INTO `departments`
+(`ID`, `name`, `img`, `description`)
+VALUES
+(0,'技术部','./pictures/0.png','我们部门只招妹子'),
+(1,'策划推广部','./pictures/1.png','妹子请去技术部');
+
+INSERT INTO `game`
+(`passed_number`)
+VALUES
+(0);
