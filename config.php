@@ -17,7 +17,7 @@ try {
 
 
 //Return Code Process Function:
-function response($code, $errMsg='success') {
+function response($code, $errMsg = 'Success') {
 	echo json_encode(array('code' => $code, 'errMsg' => $errMsg));
 	exit(0);
 }
