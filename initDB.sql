@@ -25,7 +25,8 @@ CREATE TABLE `departments`(
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE `game`(
-	`passed_number` INTEGER NOT NULL
+  `passed_number` INTEGER NOT NULL,
+  `participate_number` INTEGER NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 INSERT INTO `departments`
@@ -35,6 +36,6 @@ VALUES
 (1,'策划推广部','./pictures/1.png','妹子请去技术部');
 
 INSERT INTO `game`
-(`passed_number`)
+(`passed_number`,`participate_number`)
 VALUES
-(0);
+(0,0);
