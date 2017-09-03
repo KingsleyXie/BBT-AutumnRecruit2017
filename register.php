@@ -7,9 +7,9 @@ blankCheck('name', 'gender', 'college', 'grade', 'dorm', 'tel', 'department1');
 
 $sql = '
 INSERT INTO `register`
-(`name`, `gender`, `college`, `grade`, `dorm`, `tel`, `department1`, `department2`, `intro`)
+(`name`, `gender`, `college`, `grade`, `dorm`, `tel`, `department1`, `department2`, `adjust`, `intro`)
 VALUES
-(?, ?, ?, ?, ?, ?, ?, ?, ?)
+(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ';
 $stmt = $connect->prepare($sql);
 $stmt->execute(array(
@@ -21,6 +21,7 @@ $stmt->execute(array(
 	$_POST['tel'],
 	$_POST['department1'],
 	$_POST['department2'],
+	$_POST['adjust'],
 	$_POST['intro']));
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
