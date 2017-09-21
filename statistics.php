@@ -2,9 +2,23 @@
 require_once './config.php';
 
 $stmt = $connect->prepare("
-       SELECT
-       DISTINCT department1
-       AS '第一志愿部门',
+       SELECT name AS '部门名称',
+       (
+           SELECT COUNT(*)
+           FROM `register`
+           AS reg
+           WHERE
+           reg.department1 = departments.name
+           OR
+           reg.department2 = departments.name
+       ) AS '报名总数',
+       (
+           SELECT COUNT(*)
+           FROM `register`
+           AS reg
+           WHERE
+           reg.department1 = departments.name
+       ) AS '第一志愿报名人数',
        (
            SELECT COUNT(*)
            FROM `register`
@@ -12,9 +26,8 @@ $stmt = $connect->prepare("
            WHERE
            reg.gender = '男'
            AND
-           reg.department1 = register.department1
-       )
-       AS '报名男生人数',
+           reg.department1 = departments.name
+       ) AS '第一志愿男生人数',
        (
            SELECT COUNT(*)
            FROM `register`
@@ -22,20 +35,15 @@ $stmt = $connect->prepare("
            WHERE
            reg.gender = '女'
            AND
-           reg.department1 = register.department1
-       )
-       AS '报名女生人数' 
-       FROM `register`");
-$stmt->execute();
-$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if (empty($result1)) response(1, '获取数据失败');
-
-print_r($result1);
-
-$stmt = $connect->prepare("
-       SELECT
-       DISTINCT department2
-       AS '第二志愿部门',
+           reg.department1 = departments.name
+       ) AS '第一志愿女生人数',
+       (
+           SELECT COUNT(*)
+           FROM `register`
+           AS reg
+           WHERE
+           reg.department2 = departments.name
+       ) AS '第二志愿报名人数',
        (
            SELECT COUNT(*)
            FROM `register`
@@ -43,9 +51,8 @@ $stmt = $connect->prepare("
            WHERE
            reg.gender = '男'
            AND
-           reg.department2 = register.department2
-       )
-       AS '报名男生人数',
+           reg.department2 = departments.name
+       ) AS '第二志愿男生人数',
        (
            SELECT COUNT(*)
            FROM `register`
@@ -53,12 +60,37 @@ $stmt = $connect->prepare("
            WHERE
            reg.gender = '女'
            AND
-           reg.department2 = register.department2
-       )
-       AS '报名女生人数' 
-       FROM `register`");
+           reg.department2 = departments.name
+       ) AS '第二志愿女生人数',
+       (
+           SELECT COUNT(*)
+           FROM `register`
+           AS reg
+           WHERE
+           reg.gender = '男'
+           AND
+           (
+               reg.department1 = departments.name
+               OR
+               reg.department2 = departments.name
+           )
+       ) AS '报名男生总数',
+       (
+           SELECT COUNT(*)
+           FROM `register`
+           AS reg
+           WHERE
+           reg.gender = '女'
+           AND
+           (
+               reg.department1 = departments.name
+               OR
+               reg.department2 = departments.name
+           )
+       ) AS '报名女生总数'
+       FROM `departments`");
 $stmt->execute();
-$result2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if (empty($result2)) response(1, '获取数据失败');
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (empty($result)) response(1, '获取数据失败');
 
-print_r($result2);
+print_r($result);
