@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once('./config.php');
+require_once './config.php';
 
 existCheck('name', 'gender', 'college', 'grade', 'dorm', 'tel', 'department1', 'department2', 'adjust', 'intro');
 blankCheck('name', 'gender', 'college', 'grade', 'dorm', 'tel', 'department1', 'adjust');
