@@ -1,5 +1,5 @@
 <?php
-/* --- Cofiguration Part Start --- */
+/* --- Configuration Part Start --- */
 
 //Close time of register system
 $closeTime = '2017-09-21 00:00:00';
@@ -10,7 +10,7 @@ $dbname = 'autumn_recruit_2017';		//Database Name
 $user = 'db_user_name';					//Username for Project Database
 $password = 'corresponding_password';		//Password for Project Database
 
-/* --- Cofiguration Part End --- */
+/* --- Configuration Part End --- */
 
 
 
