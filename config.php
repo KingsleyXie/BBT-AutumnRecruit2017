@@ -47,3 +47,39 @@ function blankCheck() {
 		}
 	}
 }
+
+
+
+
+
+// Export data to csv file and auto download
+// Source: https://segmentfault.com/a/1190000005366832
+function csv_export($data = array(), $headlist = array(), $fileName) {
+	header('Content-Type: text/csv');
+	header('Content-Disposition: attachment;filename="'.$fileName.'.csv"');
+	header('Cache-Control: max-age=0');
+
+	$fp = fopen('php://output', 'a');
+
+	foreach ($headlist as $key => $value) {
+		$headlist[$key] = iconv('utf-8', 'gbk', $value);
+	}
+	fputcsv($fp, $headlist);
+
+	$num = 0;
+	$limit = 100000;
+	$count = count($data);
+	for ($i = 0; $i < $count; $i++) {
+		$num++;
+		if ($limit == $num) { 
+			ob_flush();
+			flush();
+			$num = 0;
+		}
+		$row = $data[$i];
+		foreach ($row as $key => $value) {
+			$row[$key] = iconv('utf-8', 'gbk', $value);
+		}
+		fputcsv($fp, $row);
+	}
+}

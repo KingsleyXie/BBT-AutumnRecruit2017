@@ -92,3 +92,6 @@ $stmt = $connect->prepare("
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (empty($result)) response(1, '获取数据失败');
+
+$heads = ['部门名称', '报名总数', '第一志愿报名人数', '第一志愿男生人数', '第一志愿女生人数', '第二志愿报名人数', '第二志愿男生人数', '第二志愿女生人数', '报名男生总数', '报名女生总数'];
+csv_export($result, $heads, 'regsiter_statistics');
